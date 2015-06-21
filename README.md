@@ -1,7 +1,12 @@
-Sätta upp accepterade domäner
+Multigame
+---------
 
-Steg för steg hur själva uppsättningen av spelservern ska fungera
+To come: 
+* How to set up accepted domains
+* Step by step explaination on how the game server works
 
+About
+-----
 The multigame is a library to help you manage many multiplayer games, at the same time, on a server. It takes care of connecting players and viewers to games and handles the communication between them. A viewer = spectator.
 
 There is a serverpart and a client part of the library. The client part exposes an object that acts a bit like a proxy for the game that the client is connected to.
