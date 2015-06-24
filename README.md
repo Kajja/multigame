@@ -1,59 +1,57 @@
 Multigame
----------
+=========
 
-To come: 
-* How to set up accepted domains
-* Step by step explaination on how the game server works
+Multigame is a library, or perhaps more of a platform, to help you manage and build multiplayer games. It takes care of connecting players and viewers (=spectators) to games and handles the communication between them.
 
-About
------
-The multigame is a library to help you manage many multiplayer games, at the same time, on a server. It takes care of connecting players and viewers to games and handles the communication between them. A viewer = spectator.
+There is a server part and a client part of the library. The client part exposes an object that acts a bit like a proxy for the game that runs on the server, and that the client is connected to.
 
-There is a serverpart and a client part of the library. The client part exposes an object that acts a bit like a proxy for the game that the client is connected to.
+A multigame server can handle many different multiplayer games instances, of different or the same type, simultaneously.  
 
-When writing a game, using this library, you create a server object, called a Rules object. It should contain game logic and adhere to the interface specified in the library's Rules module. You should only need one Rule object for all your Game instances (if they are of the same type of game, that is). The Rule object should be stateless.
+How to use it
+-------------
 
-You will need a client part of your game too. The client part has access to a game proxy object, which takes care of the communication with the server. You decide where you want to put the game logic, server and/or client side.
+When writing a game, using this platform, you create a server object, called a Rules object. It should contain game logic and adhere to the interface specified in the platform's Rules module. You should only need one Rules object for all your game instances (if they are of the same type that is). A Rule object should be stateless.
 
-The library has no methods like 'createGame' or 'createPlayer', you create games and players yourself, using the Game and Player constructor functions and then register them with the Manager object or a Game object respectively.
+You will need a client part of your game too. The client part has access to a game proxy object, that is part of the platform, which takes care of the communication with the server. You decide where you want to put the game logic, server and/or client side.
 
-A Game and a Player object have a property called 'state', which is empty from the start. A Game's 'state' is what is sent to all who are listening to a Game when there has been an update to the state. If the client is a player it will also receive the state of the server's Player object, associated with this client.
+The platform has no methods like 'createGame' or 'createPlayer', you create games and players yourself, using the Game and Player constructor functions and then register them with the Manager object or Game object respectively.
 
-You yourself fill the state properties with whatever that is relevant for your game. Add whatever you need to a Game or Player object (properties and methods), just remember that it is the 'state'-properties that is sent to clients.
+A Game and a Player object have a property called 'state'. It is empty from the start. A Game's 'state' is what is sent to all who are connected to a Game when there has been an update to the state. If the client is a player it will also receive the state of the player object, that resides on the server and is associated with the client/socket.
 
-Protocol for the platform:
+You yourself fill the state properties with whatever that is relevant for your game. You can also add whatever you need to a Game or Player object (properties and methods), just remember that it is the 'state'-properties that are sent to clients.
 
+Protocol between server and client
+----------------------------------
 Client generated events:
-EVENT               DATA
------               ----
-connection          {?}
-disconnect          {?}
-error               {?}
-game_connect        {gameId: id} - Handled by Manager
-(add_player          {name: name} - Handled by rule, since there might be a limit on number of players etc.)
-(add_observer        {} - Handled by rule, since there might be a limit on number of observers etc.)
-msg                 {what ever = game specific} - Handled by game rules
+
+* connection          
+* disconnect          
+* error (data: error)           
+* game_connect (data: game id)
+* add_player
+* add_observer
+* msg (data: game specific event data)
 
 Server generated events:
-EVENT               DATA
------               ----
-connect             {?}
-connect_error       {?}
-error               {?}
-disconnect          {?}
-state               {what ever = game specific}
 
-When a player/observer is connected to a game:
-- Check if it is possible to do a WebSocket-connection to the server (?)
-- Check if it is possible to connect to a specific game ('game_connect')
-
-Game specifics:
-- Register a player/observer for the game ('add_player')
+* connect
+* connect_error (data: error)
+* error (data: error)
+* disconnect (data: disconnect reason)
+* state (data: game and possibly player state)
 
 
-Från Game:
-event = {type: , whatever that is relevant for this event}
+Documentation to come:
+----------------------
 
-TODO:
-Remove socket.io dependency
-Have a db for players/observers
+* How to set up accepted domains
+* Step by step explanation on how the game server works
+
+
+TODO
+----
+These are things that should be addressed:
+
+* Remove socket.io dependency
+* Be able to connect to a db for players/observers (?!)
+* A better way to handle game and player states
