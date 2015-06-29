@@ -1,11 +1,11 @@
 Multigame
 =========
 
-Multigame is a library, or perhaps more of a platform, to help you manage and build multiplayer games. It takes care of connecting players and viewers (=spectators) to games and handles the communication between them.
+Multigame is a library, or perhaps more of a platform, to help you manage and build multiplayer games. It takes care of connecting players and viewers (=spectators) to games and handles the communication between them. It runs on node.js.
 
 There is a server part and a client part of the library. The client part exposes an object that acts a bit like a proxy for the game that runs on the server, and that the client is connected to.
 
-A multigame server can handle many different multiplayer games instances, of different or the same type, simultaneously.  
+A multigame server can handle many games instances, of different or the same type, simultaneously.  
 
 How to use it
 -------------
@@ -19,6 +19,8 @@ The platform has no methods like 'createGame' or 'createPlayer', you create game
 A Game and a Player object have a property called 'state'. It is empty from the start. A Game's 'state' is what is sent to all who are connected to a Game when there has been an update to the state. If the client is a player it will also receive the state of the player object, that resides on the server and is associated with the client/socket.
 
 You yourself fill the state properties with whatever that is relevant for your game. You can also add whatever you need to a Game or Player object (properties and methods), just remember that it is the 'state'-properties that are sent to clients.
+
+A game that use the platform is [Tricker](https://github.com/Kajja/tricker).
 
 Protocol between server and client
 ----------------------------------
@@ -41,8 +43,8 @@ Server generated events:
 * state (data: game and possibly player state)
 
 
-Documentation to come:
-----------------------
+Documentation to come
+---------------------
 
 * How to set up accepted domains
 * Step by step explanation on how the game server works
