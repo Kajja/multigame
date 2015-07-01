@@ -7,6 +7,8 @@ There is a __server part__ and a __client part__ of the library. The client part
 
 A multigame server can handle many games instances, of different or the same type, simultaneously. The WebSocket protocol is used to communicate between server and clients.
 
+Games must be built using the platform to be able to be hosted on a multigame server.
+
 Install
 -------
 ```js
@@ -16,7 +18,7 @@ npm install multigame --save
 Usage
 -----
 
-###Writing a game using the platform
+###Writing a game
 When writing a game, using this platform, you create a server object, called a Rules object. It should contain game logic and adhere to the interface specified in the platform's Rules module. You should only need one Rules object for all your game instances (if they are of the same type that is). A Rule object should be stateless.
 
 You will need a client part of your game too. The client part has access to a game proxy object, that is part of the platform, which takes care of the communication with the server. You decide where you want to put the game logic, server and/or client side.
@@ -27,7 +29,7 @@ You yourself fill the state properties with whatever that is relevant for your g
 
 A game that uses the platform is [Tricker](https://github.com/Kajja/tricker).
 
-###Setting up a mulitgame server
+###Setting up a multigame server
 ```js
 var http = require('http');
 
@@ -79,14 +81,6 @@ You might want to add additional properties and methods to the Player object.
 
 
 ###Retrieving a specific game
-```js
-// Get the Manager "singleton"
-var Manager = require('multigame').Manager;
-
-var game = Manager.getGame(id);
-```
-
-###Setting up a domain that should be ok
 ```js
 // Get the Manager "singleton"
 var Manager = require('multigame').Manager;
