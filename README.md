@@ -1,9 +1,9 @@
 Multigame
 =========
 
-Multigame is a library, or perhaps more of a platform, to help you manage and build multiplayer games. It takes care of connecting players and viewers (=spectators) to games and handles the communication between them. It runs on node.js.
+Multigame is a library, or perhaps more of a platform, to help you manage and build JavaScript multiplayer games. It takes care of connecting players and viewers (=spectators) to games and handles the communication between them. It runs on node.js.
 
-There is a server part and a client part of the library. The client part exposes an object that acts a bit like a proxy for the game that runs on the server, and that the client is connected to.
+There is a __server part__ and a __client part__ of the library. The client part exposes an object that acts a bit like a proxy for the game that runs on the server, and that the client is connected to.
 
 A multigame server can handle many games instances, of different or the same type, simultaneously. The WebSocket protocol is used to communicate between server and clients.
 
@@ -27,6 +27,50 @@ A Game and a Player object have a property called 'state'. It is empty from the 
 You yourself fill the state properties with whatever that is relevant for your game. You can also add whatever you need to a Game or Player object (properties and methods), just remember that it is the 'state'-properties that are sent to clients.
 
 A game that uses the platform is [Tricker](https://github.com/Kajja/tricker).
+
+###Setting up a new game
+
+```js
+// Get the Manager "singleton"
+var Manager = require('multigame').Manager;
+
+// Get the Game constructor function
+var Game = require('multigame').Game;
+
+// Get a Rules object for the type of game you want to create
+var TrickerRules = require('tricker').Rules;
+
+// Create a new game and register it with the Manager object
+Manager.registerGame(new Game({id: 1, name: 'The dungeon', rules: TrickerRules}));
+```
+
+###Creating a player for a game
+```js
+// Get the Player constructor function
+var Player = require('multigame').Player;
+
+// Create a Player object
+var player = new Player(socket);
+
+// Register the Player object with the game
+game.registerObserver(player);
+```
+You might want to add additional properties and methods to the Player object.
+
+
+###Retrieving a specific game
+```js
+// Get the Manager "singleton"
+var Manager = require('multigame').Manager;
+
+var game = Manager.getGame(id);
+```
+
+###Retrieving a specific player
+```js
+game.getPlayer(socket);
+```
+
 
 Protocol between server and client
 ----------------------------------
