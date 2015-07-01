@@ -20,7 +20,7 @@ A Game and a Player object have a property called 'state'. It is empty from the 
 
 You yourself fill the state properties with whatever that is relevant for your game. You can also add whatever you need to a Game or Player object (properties and methods), just remember that it is the 'state'-properties that are sent to clients.
 
-A game that use the platform is [Tricker](https://github.com/Kajja/tricker).
+A game that uses the platform is [Tricker](https://github.com/Kajja/tricker).
 
 Protocol between server and client
 ----------------------------------
