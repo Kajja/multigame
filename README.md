@@ -16,17 +16,37 @@ npm install multigame --save
 Usage
 -----
 
+###Writing a game using the platform
 When writing a game, using this platform, you create a server object, called a Rules object. It should contain game logic and adhere to the interface specified in the platform's Rules module. You should only need one Rules object for all your game instances (if they are of the same type that is). A Rule object should be stateless.
 
 You will need a client part of your game too. The client part has access to a game proxy object, that is part of the platform, which takes care of the communication with the server. You decide where you want to put the game logic, server and/or client side.
-
-The platform has no methods like 'createGame' or 'createPlayer', you create games and players yourself, using the Game and Player constructor functions and then register them with the Manager object or Game object respectively.
 
 A Game and a Player object have a property called 'state'. It is empty from the start. A Game's 'state' is what is sent to all who are connected to a Game when there has been an update to the state. If the client is a player it will also receive the state of the player object, that resides on the server and is associated with the client/socket.
 
 You yourself fill the state properties with whatever that is relevant for your game. You can also add whatever you need to a Game or Player object (properties and methods), just remember that it is the 'state'-properties that are sent to clients.
 
 A game that uses the platform is [Tricker](https://github.com/Kajja/tricker).
+
+###Setting up a mulitgame server
+```js
+var http = require('http');
+
+// Get the multigame server "factory" function
+var GameServer = require('multigame').Server;
+
+// Get the verifyer object
+var verifyer = require('multigame').verifyer;
+
+// Create a HTTP server
+var server = http.createServer(app);
+server.listen(port);
+
+// Register domains from which connections should be accepted
+verifyer.registerDomain('localhost:3000');
+
+// Create a new multigame server using the "factory" function
+var gameServer = GameServer(server, verifyer);
+```
 
 ###Setting up a new game
 
@@ -66,15 +86,18 @@ var Manager = require('multigame').Manager;
 var game = Manager.getGame(id);
 ```
 
-###Retrieving a specific player
+###Setting up a domain that should be ok
 ```js
-game.getPlayer(socket);
+// Get the Manager "singleton"
+var Manager = require('multigame').Manager;
+
+var game = Manager.getGame(id);
 ```
 
 
 Protocol between server and client
 ----------------------------------
-Client generated events:
+###Client generated events:
 
 * connection          
 * disconnect          
@@ -84,7 +107,7 @@ Client generated events:
 * add_observer
 * msg (data: game specific event data)
 
-Server generated events:
+###Server generated events:
 
 * connect
 * connect_error (data: error)
@@ -95,8 +118,6 @@ Server generated events:
 
 Documentation to come
 ---------------------
-
-* How to set up accepted domains
 * Step by step explanation on how the game server works
 
 
