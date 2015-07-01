@@ -5,7 +5,7 @@ Multigame is a library, or perhaps more of a platform, to help you manage and bu
 
 There is a server part and a client part of the library. The client part exposes an object that acts a bit like a proxy for the game that runs on the server, and that the client is connected to.
 
-A multigame server can handle many games instances, of different or the same type, simultaneously.
+A multigame server can handle many games instances, of different or the same type, simultaneously. The WebSocket protocol is used to communicate between server and clients.
 
 Install
 -------
