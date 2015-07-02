@@ -1,4 +1,4 @@
-Multigame
+multigame
 =========
 
 Multigame is a library, or perhaps more of a platform, to help you manage and build JavaScript multiplayer games. It takes care of connecting players and viewers (=spectators) to games and handles the communication between them. It runs on node.js.
@@ -47,7 +47,7 @@ server.listen(port);
 verifyer.registerDomain('localhost:3000');
 
 // Create a new multigame server using the "factory" function
-var gameServer = GameServer(server, verifyer);
+var multiServer = GameServer(server, verifyer);
 ```
 
 ###Setting up a new game
@@ -87,7 +87,9 @@ var Manager = require('multigame').Manager;
 
 var game = Manager.getGame(id);
 ```
-
+Overview
+--------
+![Overview example](./docs/overview.png)
 
 Protocol between server and client
 ----------------------------------
