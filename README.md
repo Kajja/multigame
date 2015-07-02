@@ -11,8 +11,14 @@ Games must be built using the platform to be able to be hosted on a multigame se
 
 Install
 -------
+On the server:
 ```js
 npm install multigame --save
+```
+and in the client code:
+```html
+<script src="/socket.io/socket.io.js"></script>
+<script src="<your directory>/gameProxy.js"></script>
 ```
 
 Usage
@@ -110,11 +116,6 @@ Protocol between server and client
 * error (data: error)
 * disconnect (data: disconnect reason)
 * state (data: game and possibly player state)
-
-
-Documentation to come
----------------------
-* Step by step explanation on how the game server works
 
 
 TODO
