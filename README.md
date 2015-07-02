@@ -89,7 +89,7 @@ var game = Manager.getGame(id);
 ```
 Overview
 --------
-![Overview example](./docs/overview.png)
+![Overview example](./docs/overview_.png)
 
 Protocol between server and client
 ----------------------------------
