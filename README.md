@@ -3,11 +3,15 @@ multigame
 
 Multigame is a library, or perhaps more of a platform, to help you manage and build JavaScript multiplayer games. It takes care of connecting players and viewers (=spectators) to games and handles the communication between them. It runs on node.js.
 
-There is a __server part__ and a __client part__ of the library. The client part exposes an object that acts a bit like a proxy for the game that runs on the server, and that the client is connected to.
+There is a __server part__ and a __client part__ of the library. The client part exposes an object that acts a bit like a proxy for the game that runs on the server, that the client is connected to.
 
-A multigame server can handle many games instances, of different or the same type, simultaneously. The WebSocket protocol is used to communicate between server and clients.
+A multigame server can handle many games instances, of different game types, simultaneously. The WebSocket protocol is used to communicate between server and clients.
 
 Games must be built using the platform to be able to be hosted on a multigame server.
+
+Overview
+--------
+![Overview example](./docs/overview_.png)
 
 Install
 -------
@@ -93,13 +97,23 @@ var Manager = require('multigame').Manager;
 
 var game = Manager.getGame(id);
 ```
-Overview
---------
-![Overview example](./docs/overview_.png)
+
+###Connect to a game
+In the client code, you first need to register an object as an observer to the GameProxy object to receive server updates. The GameProxy object expects the object to have an update(state) method that it can call.
+
+```js
+// Register the tricker client as an observer to GameProxy events
+GameProxy.registerObserver(TrickerClient);
+```
+Then you can connect to a game on the server:
+```js
+// Connecting to a game
+GameProxy.connect(url, gameId, clientType);
+```
 
 Protocol between server and client
 ----------------------------------
-###Client generated events:
+###Client generated events
 
 * connection          
 * disconnect          
@@ -109,7 +123,7 @@ Protocol between server and client
 * add_observer
 * msg (data: game specific event data)
 
-###Server generated events:
+###Server generated events
 
 * connect
 * connect_error (data: error)
