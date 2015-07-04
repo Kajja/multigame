@@ -26,7 +26,7 @@ Usage
 -----
 
 ###Writing a game
-When writing a game, using this platform, you create a server object, called a Rules object. It should contain game logic and adhere to the interface specified in the platform's Rules module. You should only need one Rules object for all your game instances (if they are of the same type that is). A Rule object should be stateless.
+When writing a game, using this platform, you create a server object called a Rules object. It should contain game logic and adhere to the interface specified in the platform's Rules module. You should only need one Rules object for all your game instances (if they are of the same type that is). A Rule object should be stateless.
 
 You will need a client part of your game too. The client part has access to a game proxy object, that is part of the platform. It takes care of the communication with the server. You decide where you want to put the game logic, server and/or client side.
 
