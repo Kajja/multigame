@@ -9,13 +9,10 @@ A multigame server can handle many games instances, of different game types, sim
 
 Games must be built using the platform to be able to be hosted on a multigame server.
 
-Overview
---------
-![Overview example](./docs/overview_.png)
-
 Install
 -------
-On the server:
+You need Node.js on your machine, then do:
+
 ```js
 npm install multigame --save
 ```
@@ -31,7 +28,7 @@ Usage
 ###Writing a game
 When writing a game, using this platform, you create a server object, called a Rules object. It should contain game logic and adhere to the interface specified in the platform's Rules module. You should only need one Rules object for all your game instances (if they are of the same type that is). A Rule object should be stateless.
 
-You will need a client part of your game too. The client part has access to a game proxy object, that is part of the platform, which takes care of the communication with the server. You decide where you want to put the game logic, server and/or client side.
+You will need a client part of your game too. The client part has access to a game proxy object, that is part of the platform. It takes care of the communication with the server. You decide where you want to put the game logic, server and/or client side.
 
 A Game and a Player object have a property called 'state'. It is empty from the start. A Game's 'state' is what is sent to all who are connected to a Game when there has been an update to the state. If the client is a player it will also receive the state of the player object, that resides on the server and is associated with the client/socket.
 
@@ -99,17 +96,21 @@ var game = Manager.getGame(id);
 ```
 
 ###Connect to a game
-In the client code, you first need to register an object as an observer to the GameProxy object to receive server updates. The GameProxy object expects the object to have an update(state) method that it can call.
+In the client code, you first need to register an object as an observer to the GameProxy object to receive server updates. The GameProxy object expects the object to have an update(state) method.
 
 ```js
 // Register the tricker client as an observer to GameProxy events
 GameProxy.registerObserver(TrickerClient);
 ```
-Then you can connect to a game on the server:
+Then connect to a game on the server:
 ```js
 // Connecting to a game
 GameProxy.connect(url, gameId, clientType);
 ```
+
+Overview
+--------
+![Overview example](./docs/overview_.png)
 
 Protocol between server and client
 ----------------------------------
