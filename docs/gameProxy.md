@@ -1,9 +1,6 @@
 # gameProxy
 
 
-
-
-
 * * *
 
 ### connect(url, gameId, clientType) 
