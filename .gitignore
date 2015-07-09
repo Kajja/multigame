@@ -39,3 +39,7 @@ Thumbs.db
 # Node
 ######################
 node_modules
+
+# Coverage
+######################
+coverage
