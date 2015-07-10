@@ -11,15 +11,15 @@
     "socket.io": "^1.3.5"
   },
   "devDependencies": {
-    "jsdoc": "^3.3.2",
+    "jsdoc-to-markdown": "^1.1.1",
     "jshint": "^2.8.0",
     "watch": "^0.16.0"
   },
   "scripts": {
     "test": "mocha",
     "lint": "jshint --show-non-errors ./lib",
-    "docs": "jsdoc -d ./docum ./lib",
-    "build": "npm run lint && npm test",
+    "docs": "jsdoc2md ./lib/*.js > ./docs/api.md",
+    "build": "npm run lint && npm test && npm run docs",
     "watch": "watch \"npm run build\" ./lib"
   }
 }
