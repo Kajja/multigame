@@ -21,11 +21,12 @@ and in the client code:
 <script src="/socket.io/socket.io.js"></script>
 <script src="<your directory>/gameProxy.js"></script>
 ```
+The gameProxy.js file can be found under ./lib.
 
 Usage
 -----
 
-###Writing a game
+### Writing a game
 When writing a game, using this framework, you create a Rules object to be placed on the server. It shall implement the multigame's Rules interface and this is a place to put game logic. You should only need one Rules object for all your game instances (if they are of the same type that is). A Rule object should be stateless.
 
 You will need a client part of your game too. The client part has access to a game proxy object, that is part of the framework. It takes care of the communication with the server. You decide where you want to put the game logic, server and/or client side.
@@ -36,7 +37,7 @@ You yourself fill the state properties with whatever that is relevant for your g
 
 A game that uses the framework is [Tricker](https://github.com/Kajja/tricker).
 
-###Setting up a multigame server
+### Setting up a multigame server
 ```js
 var http = require('http');
 
@@ -57,7 +58,7 @@ verifyer.registerDomain('localhost:3000');
 var multiServer = GameServer(server, verifyer);
 ```
 
-###Setting up a new game
+### Setting up a new game
 
 ```js
 // Get the Manager "singleton"
@@ -73,7 +74,7 @@ var TrickerRules = require('tricker').Rules;
 Manager.registerGame(new Game({id: 1, name: 'The dungeon', rules: TrickerRules}));
 ```
 
-###Creating a player for a game
+### Creating a player for a game
 ```js
 // Get the Player constructor function
 var Player = require('multigame').Player;
@@ -87,7 +88,7 @@ game.registerObserver(player);
 You might want to add additional properties and methods to the Player object.
 
 
-###Retrieving a specific game
+### Retrieving a specific game
 ```js
 // Get the Manager "singleton"
 var Manager = require('multigame').Manager;
@@ -95,7 +96,7 @@ var Manager = require('multigame').Manager;
 var game = Manager.getGame(id);
 ```
 
-###Connect to a game
+### Connect to a game
 In the client code, you first need to register an object as an observer to the GameProxy object to receive server updates. The GameProxy object expects the object to have an update(state) method.
 
 ```js
@@ -114,7 +115,7 @@ Overview
 
 Protocol between server and client
 ----------------------------------
-###Client generated events
+### Client generated events
 
 * connection          
 * disconnect          
@@ -124,7 +125,7 @@ Protocol between server and client
 * add_observer
 * msg (data: game specific event data)
 
-###Server generated events
+### Server generated events
 
 * connect
 * connect_error (data: error)
